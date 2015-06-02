@@ -4,6 +4,7 @@ target
 .classpath
 .project
 *.class
+*.log
 node_modules
 bower_components
 # Package Files #
