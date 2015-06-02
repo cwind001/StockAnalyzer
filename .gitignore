@@ -1,0 +1,11 @@
+target
+.metadata
+.settings
+.classpath
+.project
+*.class
+node_modules
+bower_components
+# Package Files #
+*.war
+*.ear
