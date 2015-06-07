@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+  <title>StockAnalyzer</title>
+</head>
+<body>
+
+<h1>后台管理系统</h1>
+<h2><%=message%></h2>
+
+<ng-view></ng-view>
+
+<!-- Libraries -->
+<script src="/js/angular.js"></script>
+<script src="/js/angular-route.js"></script>
+<script src="/js/angular-resource.js"></script>
+
+<!-- Template -->
+<script type="text/ng-template" id="/todos.html">
+	Initialize Stock Codes: {{ stockcodes }} <br/><br/>
+  	<button ng-click="initialize()">Initialize</button>
+
+	<br/><br/>
+  	Stock details: {{ stockdetails }}
+  	<button ng-click="getDetail()">Get Details</button>
+
+</script>
+
+<script>
+  angular.module('app', ['ngRoute', 'ngResource'])
+
+    //---------------
+    // Services
+    //---------------
+
+    .factory('Stocks', ['$resource', function($resource){
+      return $resource('/manager/stockcodes', null, {
+        'update': { method: 'PUT' }
+      });
+    }])
+
+    //---------------
+    // Controllers
+    //---------------
+
+    .controller('InitController', ['$scope', 'Stocks', function ($scope, Stocks) {
+
+      $scope.initialize = function(){
+        $scope.stockcodes = Stocks.query();
+      }
+
+    }])
+
+    //---------------
+    // Routes
+    //---------------
+
+    .config(['$routeProvider', function ($routeProvider) {
+      $routeProvider
+        .when('/', {
+          templateUrl: '/todos.html',
+          controller: 'InitController'
+        });
+    }]);
+</script>
+
+</body>
+</html>
