@@ -1,0 +1,185 @@
+html,body,p,ul,li,img,h1,h2,h3,h4,pre{margin:0;padding:0;border:0}
+body,button,input,textarea,pre{font-family:"Helvetica Neue",Helvetica,"Microsoft Yahei",Arial,sans-serif}
+html,body{width:100%;height:100%;border:0;overflow:hidden;font-family:"Helvetica Neue",Helvetica,"Microsoft Yahei",Arial,sans-serif}
+body{background:#fff;-webkit-text-size-adjust:none}
+h1,h2,h3,h4{font-weight:normal}
+ul{list-style:none}
+a{text-decoration:none}
+img{border:none}
+textarea{overflow:auto}
+.clearfix{*zoom:1}
+.clearfix:after{display:table;line-height:0;content:"";clear:both}
+.pa{position:absolute}
+.pr{position:relative}
+.fl{float:left;display:inline}
+.fr{float:right;display:inline}
+.pt3{padding-top:3px}
+.pt12{padding-top:12px}
+.mt5{margin-top:5px}
+.mt8{margin-top:8px}
+.mt10{margin-top:10px}
+.mt20{margin-top:20px}
+.mt15{margin-top:15px}
+.mt35{margin-top:35px}
+.mt50{margin-top:50px}
+.mb35{margin-bottom:35px}
+.mr5{margin-right:5px}
+.mr10{margin-right:10px}
+.mr20{margin-right:20px}
+.mr30{margin-right:30px}
+.mr35{margin-right:35px}
+.mr50{margin-right:50px}
+.mr60{margin-right:60px}
+.ml5{margin-left:5px}
+.ml10{margin-left:10px}
+.ml18{margin-left:18px}
+.ml25{margin-left:25px}
+.ml30{margin-left:30px}
+.ml35{margin-left:35px}
+.ml50{margin-left:50px}
+.ml60{margin-left:60px}
+.tr{text-align:right}
+.tc{text-align:center}
+.f12{font-size:12px}
+.f14{font-size:14px}
+.f16{font-size:16px}
+.f18{font-size:18px}
+.f24{font-size:24px}
+.fb{font-weight:bold}
+.white{color:#fff}
+.grey9{color:#999}
+.grey6{color:#666}
+.lh20{line-height:20px}
+.lh24{line-height:24px}
+.bgCli{background:#f1effc}
+.bgSer{background:#d1f0ed}
+.bgNot{background:#FBF8EA;color:#999}
+.h{height:100%}
+.h20{height:20px}
+.h50{height:50px}
+.h60{height:60px}
+.h80{height:80px}
+.h280{height:280px}
+.lh50{line-height:50px}
+.w{width:100%}
+.w40{width:40px}
+.w90{width:90px}
+.bgGrey{background:#edeff2}
+.img-sm{max-width:200px;max-height:200px;*width:200px;*height:200px;cursor:pointer;vertical-align:bottom}
+.header,.footer,#online-loading{position:absolute;z-index:110;left:0;width:100%}
+.header{top:0;box-shadow:0 1px 5px rgba(0,0,0,0.05)}
+.ie-title{*position:absolute;*top:10px;*left:20px}
+.footer{position:absolute;bottom:0;background:#fff;box-shadow:0 -1px 5px rgba(0,0,0,0.05);z-index:120}
+.wrap{height:100%;overflow-y:auto;-webkit-overflow-scrolling:touch;-webkit-transform:translate3d(0, 0, 0)}
+.footer-con{border-top:1px solid #d9d9d9}
+#online-loading{top:50%;height:16px;text-align:center;margin-top:-8px;display:none}
+#online-loading img{border:0}
+.face-md{width:24px;height:24px;vertical-align:middle}
+.head-md{width:40px;height:40px;border-radius:50%;vertical-align:middle}
+.head-big{width:60px;height:60px;border-radius:50%}
+.flow{color:#333;position:relative}
+.flow a{color:#4298ba}
+.flow a:hover{color:#0088ad;text-decoration:underline}
+.flow ul{padding:75px 15px;*padding:100px 15px}
+.flow li{margin-bottom:15px}
+.flow .msg{margin-top:5px;width:80%;word-wrap:break-word;word-break:break-all;*overflow:hidden}
+.flow .ser-msg{margin-left:10px}
+.flow .cli-msg{margin-right:10px}
+.flow .msg-con{position:relative;padding:8px 10px;display:inline-block;border-radius:3px;font-size:14px;*top:3px}
+.flow .msg-img-con{padding:2px;font-size:0}
+.flow .ser-msg .msg-con{border-top-left-radius:0}
+.flow .cli-msg .msg-con{border-bottom-right-radius:0}
+.flow .img-con{min-width:120px;min-height:30px;_width:100px;_height:20px}
+.arrow-tl,.arrow-br{position:absolute;background:#fff;height:0;width:0;font-size:0}
+.arrow-br{bottom:0;right:-10px;border-right:10px solid transparent;border-bottom:10px solid #f1effc;*right:-10px;*border-right:10px solid #fff}
+.arrow-tl{top:0;left:-10px;border-left:10px solid transparent;border-top:10px solid #d1f0ed;*left:-10px;*border-left:10px solid #fff}
+.msg-status{display:inline-block;position:absolute;width:20px;height:16px;bottom:0;left:-25px;margin-top:-8px}
+.status-success,.status-error{display:inline-block;width:16px;height:10px;background-repeat:no-repeat}
+.status-success{background-position:-16px 0}
+.status-error{background-position:-32px 0}
+.ipt-status{display:inline-block;position:absolute;font-size:12px;width:60px;top:50%;left:100%;margin-top:-10px;margin-left:5px}
+#mechat-message-box{position:absolute;top:0;left:0;width:100%;height:100%;background:#fff;font-size:14px;display:none;z-index:200}
+#mechat-lvmsg-txt{line-height:20px;font-size:14px;max-height:60px;color:#333;overflow:hidden;word-wrap:break-word;white-space:pre-wrap;*height:70px}
+#mechat-chat-header,#mechat-msgbox-header{position:absolute;top:0;left:0;width:100%;z-index:300;height:50px;background:#1ABC9C}
+#mechat-msgbox-header{height:50px;text-align:center}
+#mechat-msgbox-header .turn{line-height:50px;position:absolute;top:0;left:0}
+#mechat-chat-header .oper_minbtn{position:absolute;right:0;top:0}
+#mechat-msg-title{line-height:53px}
+#mechat-msg-title .mechat-icon{width:120px;text-align:right;color:#fff;line-height:24px;font-size:18px;margin-left:12px}
+#mechat-msgbox-body{position:relative;width:100%;height:100%;overflow:auto;color:#384047;overflow:hidden}
+#mechat-msgbox-body div{margin:60px 15px 0}
+#mechat-msgbox-body p{margin:0}
+#mechat-msgbox-body .mechat-input-txt{border:1px solid #ccc;font-size:14px;color:#999;resize:none;height:110px;width:97%;padding:5px 1.5%;margin-top:13px;border-radius:3px;line-height:20px;margin-bottom:0}
+#mechat-msgbox-body .mechat-input-layout{margin:15px 0 0;border:1px solid #ccc;overflow:hidden}
+#mechat-msgbox-body #mechat-message-email,#mechat-msgbox-body #mechat-message-phone{padding-top:5px;padding-bottom:5px;height:30px;line-height:30px;margin-top:8px;margin-bottom:2px}
+#mechat-message-submit,#success-btn{display:inline-block;background:#00CFAC;color:#fff;font-size:16px;padding:11px 0;width:100%;margin-top:13px;text-align:center;border-radius:4px;border:none;cursor:pointer;text-decoration:none;background:-o-linear-gradient(top, #00cfac 0, #00c29b 100%);background:-moz-linear-gradient(top, #00cfac, #00c29b);background:-webkit-gradient(linear, 0 0, 0 100%, from(#00cfac), to(#00c29b))}
+#mechat-msgbox-body a:hover{background:#00C29B}
+#mechat-msgbox-body a:active{background:#007A7B}
+#mechat-msgbox-body #mechat-msgsuccess{position:absolute;top:0;left:0;width:100%;height:100%;margin:0;background:#fff;z-index:100;display:none;text-align:center}
+#mechat-msgsuccess .success-img{margin-top:90px}
+#mechat-msgsuccess .success-img img{width:80px;height:63px}
+#mechat-msgsuccess h2{font-size:18px;font-weight:bold;padding:10px 0;color:#333}
+#mechat-msgsuccess p{width:250px;margin:0 auto;line-height:24px;font-size:16px;color:#666}
+#mechat-msgsuccess .succes-btns{margin:15px 0 0}
+#mechat-msgsuccess .succes-btns p{margin-top:15px;text-align:center}
+#mechat-msgsuccess .succes-btns p a{color:#4298ba}
+#mechat-msgsuccess .succes-btns p a:hover{color:#0088ad;background:none;text-decoration:underline}
+#success-btn{width:130px}
+.img-sending{top:0;left:0}
+.img-sending p{position:absolute;text-align:center;top:50%;width:100%;color:#6F87BB;margin-top:-10px;font-size:14px}
+.img-file{position:absolute;top:0;left:0;width:100%;height:100%;cursor:pointer;opacity:0;filter:alpha(opacity=0)}
+.notice{position:absolute;left:50%;bottom:100px;padding:5px 10px;z-index:9999999;border-radius:5px;color:#9F9876;background:#FBF8EA;border:1px solid #D5CEAF}
+#notice_bar{position:absolute;top:0;left:0;width:100%;height:40px;line-height:40px;text-align:center;color:#fff;background:#f6bc66;z-index:90;opacity:0.95;filter:alpha(opacity=95);display:none}
+#leaveTips,#leaveTips .tips-shadow,#leaveTips .tips-title{position:absolute;top:0;left:0;width:100%;height:100%;cursor:pointer;display:none}
+#leaveTips{z-index:121}
+#leaveTips .tips-shadow{background:#000;opacity:0.08;filter:alpha(opacity=8)}
+#leaveTips .tips-title{top:50%;height:20px;color:#e66b62;margin-top:-10px;text-align:center;display:none}
+.wrap{height:auto;position:absolute;width:100%;top:60px;bottom:80px;_position:relative;_top:-10px;_height:100%}
+.flow ul{padding:15px;_padding:100px 15px}
+.icon{display:inline-block;vertical-align:middle;background-repeat:no-repeat}
+.icon-voice,.icon-mute,.icon-max,.icon-min,.icon-contact{width:10px;height:10px}
+.icon-voice{background-position:-1px 0}
+a:hover .icon-voice{background-position:-45px 0}
+.icon-mute{background-position:-33px 0}
+a:hover .icon-mute{background-position:-77px 0}
+.icon-max{background-position:-12px 0}
+a:hover .icon-max{background-position:-56px 0}
+.icon-min{background-position:-23px 0}
+a:hover .icon-min{background-position:-67px 0}
+.icon-face,.icon-img,.icon-mail,.icon-mail-2,.icon-qq,.icon-phone{width:17px;height:17px}
+.icon-face{background-position:-1px -25px}
+.icon-face:hover{background-position:-103px -25px}
+.icon-img{background-position:-18px -25px}
+#MC_imgUp:hover .icon-img,.icon-img:hover{background-position:-120px -25px}
+.icon-mail{background-position:-32px -25px;margin-top:1px;*margin-top:0}
+.icon-mail-2{background-position:-80px -24px}
+.icon-qq{background-position:-48px -24px;padding-top:3px;*padding-top:0}
+.icon-phone{background-position:-64px -24px}
+.icon-contact{width:16px;height:14px;display:none;background-position:0 -10px}
+.oper_btn{display:inline-block;padding:12px 8px}
+.operator{padding:10px 0;margin-left:20px;margin-right:90px}
+.oper-name{position:relative;display:inline-block;vertical-align:middle;line-height:24px;z-index:101;height:20px;width:100%;overflow:hidden;*width:140px}
+.oper-name .icon-contact{position:absolute;top:50%;right:-20px;margin-top:-8px;cursor:pointer}
+#oper-company{overflow:hidden;*width:140px}
+.arrow-tc{position:absolute;height:0;width:0;font-size:0;bottom:-10px;right:-22px;margin-left:-10px;border-left:10px solid transparent;border-right:10px solid transparent;border-bottom:10px solid #fff;z-index:101;display:none}
+.initial .arrow-tc{*border-left:10px solid #00c8ab;*border-right:10px solid #00c8ab}
+.contact{position:absolute;display:inline-block;top:30px;right:-130px;width:200px;padding:5px 0;z-index:100;color:#666;border-radius:8px;background:#fff;box-shadow:0 0 10px #ccc;display:none;*border:1px solid #efefef;border:1px solid #efefef\0}
+.contact a{position:relative;display:block;margin:5px 18px;line-height:20px;color:#3a7ea5;cursor:pointer}
+.contact i{position:absolute;top:2px;left:0;_position:static}
+.contact span{display:block;_display:inline-block;margin-left:24px;_margin-left:0;word-wrap:break-word;word-break:break-all}
+.contact a:hover{text-decoration:underline}
+.text-layout{margin:0 10px;height:40px}
+.text{width:100%;height:40px;margin:5px 0 0;padding:0;border:0;color:#999;resize:none;font-size:14px}
+.text:focus{outline:none}
+.ft-btns{position:relative;height:40px;padding:0 10px;overflow:hidden}
+.ft-btns a{display:inline-block;margin-top:10px;cursor:pointer;overflow:hidden}
+.send-btn{position:absolute;right:10px;bottom:10px;cursor:pointer;border:none;width:64px;height:24px;border-radius:4px;font-size:14px}
+.send-btn:hover{background:#2aa48b}
+.face-con{position:absolute;width:300px;height:102px;left:0;top:-105px;border-top:3px solid #fff;background:#fff;overflow-y:auto;display:none;box-shadow:0 0 8px #1ABC9C;border:1px solid #ccc\9}
+.face-con ul{margin:0 6px}
+.face-con li{float:left;margin:3px}
+.emoji-face{display:inline-block;width:24px;height:24px;cursor:pointer;background-repeat:no-repeat}
+.mini-emoji-face{display:inline-block;width:17px;height:17px;background-size:72px 180px;background-repeat:no-repeat;background-position:-1px -1px;vertical-align:top}
+#MC_imgUp .icon-img{_margin-top:0px}
+#MC_imgUp .img-file{*width:24px;*height:24px;_width:0px;*margin-left:-10px}
+#paste_img{position:absolute;top:-100%;left:-100%;width:1px;height:1px;z-index:999;overflow:hidden}

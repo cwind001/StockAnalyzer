@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var todos = require('./routes/todos');
 var manager = require('./routes/manager');
+var stocks = require('./routes/stocks');
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/stockAnalyzer', function(err) {
@@ -35,6 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/todos', todos);
 app.use('/manager', manager);
+app.use('/stocks', stocks);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

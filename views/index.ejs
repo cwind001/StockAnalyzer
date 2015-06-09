@@ -2,18 +2,72 @@
 <html ng-app="app">
 <head>
   <title>StockAnalyzer</title>
+  <link rel='stylesheet' href='/stylesheets/style.min.css'/>
+  <link rel='stylesheet' href='/stylesheets/application.css'/>
+  <link rel='stylesheet' href='/stylesheets/market.css'/>
+  <link rel='stylesheet' href='/stylesheets/bootstrap.min.css'/>
+
+  <!-- Libraries -->
+  <script src="/js/jquery-1.11.3.min.js"></script>
+  <script src="/js/angular.js"></script>
+  <script src="/js/angular-route.js"></script>
+  <script src="/js/angular-resource.js"></script>
+
 </head>
-<body>
+<body style="height:100%;overflow:scroll;">
+   <!-- 顶部主导航 S -->
+<div id="global_header" class="global_header">
+  <div class="wrapper_center clearfix global_nav_inner">
+    <div class="logo"><a href="#">股票分析</a></div>
+    <ul id="global_nav" class="global_nav">
+        <!-- 行情 -->
+        <li class="current">
+          <a href="#/5574279d97775bf586c52965">行情</a>
+        </li>
+        <!-- /行情 -->
+        <li class="">
+          <a href="#/557684afd6a938f878923108">推荐</a>
+        </li>
+
+        <li class="">
+          <a href="#/557684bdd6a938f878923109">持仓</a>
+        </li>
+      </ul>
+    <div class="help"><a href="/manager">后台管理</a></div>
+  </div>
+</div>
+<!-- 顶部主导航 E -->
+<div class="wrapper_center clearfix global_nav_inner" >
 
 <ng-view></ng-view>
 
-<!-- Libraries -->
-<script src="/js/angular.js"></script>
-<script src="/js/angular-route.js"></script>
-<script src="/js/angular-resource.js"></script>
-
 <!-- Template -->
-<script type="text/ng-template" id="/todos.html">
+<script type="text/ng-template" id="/main.html">
+<div class="market_data_area">
+  <!-- 指数 S -->
+  <dl class="market_item m1">
+    <dt class="mn"><span class="translation_missing" title="translation missing: zh-CN.asset_class.shared.indice.上证指数">上证指数</span></dt>
+    <dd class="data"><em class="up">5068.47</em><em class="up">45.37</em><em class="up">0.90%</em></dd>
+    <dd class="chart">
+      <div class="chart_box"><img alt="000001" src="/images/000001.png" width="230" /></div>
+    </dd>
+  </dl>
+  <dl class="market_item m2">
+    <dt class="mn"><span class="translation_missing" title="translation missing: zh-CN.asset_class.shared.indice.深圳成指">深圳成指</span></dt>
+    <dd class="data"><em class="down">17501.05</em><em class="down">-37.45</em><em class="down">-0.21%</em></dd>
+    <dd class="chart">
+      <div class="chart_box"><img alt="399001" src="/images/399001.png" width="230" /></div>
+    </dd>
+  </dl>
+  <dl class="market_item m3">
+    <dt class="mn"><span class="translation_missing" title="translation missing: zh-CN.asset_class.shared.indice.沪深300">沪深300</span></dt>
+    <dd class="data"><em class="up">5268.63</em><em class="up">38.08</em><em class="up">0.73%</em></dd>
+    <dd class="chart">
+      <div class="chart_box"><img alt="000300" src="/images/000300.png" width="230" /></div>
+    </dd>
+  </dl>
+  <!-- 指数 E -->
+</div>
   Search: <input type="text" ng-model="search.name">
   <ul>
     <li ng-repeat="todo in todos | filter: search">
@@ -56,7 +110,7 @@
     // Controllers
     //---------------
 
-    .controller('TodoController', ['$scope', 'Todos', function ($scope, Todos) {
+    .controller('MainController', ['$scope', 'Todos', function ($scope, Todos) {
       $scope.editing = [];
       $scope.todos = Todos.query();
 
@@ -110,8 +164,8 @@
     .config(['$routeProvider', function ($routeProvider) {
       $routeProvider
         .when('/', {
-          templateUrl: '/todos.html',
-          controller: 'TodoController'
+          templateUrl: '/main.html',
+          controller: 'MainController'
         })
 
         .when('/:id', {
@@ -120,6 +174,18 @@
        });
     }]);
 </script>
-
+ <script>
+    $("#global_nav").click(function(e){
+      $(".global_nav li").each(function(){
+        $(this).removeClass("current");
+      });
+      currentEl = $(e.target);
+      console.log(currentEl.get(0).tagName);
+      console.log(currentEl.get(0).tagName=="A");
+      var currentEl = currentEl.get(0).tagName=="A"?currentEl.parent():currentEl;
+      currentEl.addClass("current");
+    })
+  </script>
+</div>
 </body>
 </html>

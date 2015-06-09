@@ -2,67 +2,60 @@
 <html ng-app="app">
 <head>
   <title>StockAnalyzer</title>
+  <link rel='stylesheet' href='/stylesheets/style.min.css'/>
+  <link rel='stylesheet' href='/stylesheets/application.css'/>
+  <link rel='stylesheet' href='/stylesheets/market.css'/>
+  <link rel='stylesheet' href='/stylesheets/bootstrap.min.css'/>
 </head>
-<body>
+<body style="height:100%;overflow:scroll;">
+<div class="wrapper_center clearfix global_nav_inner" >
 
 <h1>后台管理系统</h1>
 <h2><%=message%></h2>
+<br/>
 
+<div class="market_data_area">
+  <!-- 指数 S -->
+  <dl class="market_item m1">
+    <dt class="mn"><span class="translation_missing" title="translation missing: zh-CN.asset_class.shared.indice.上证指数">上证指数</span></dt>
+    <dd class="data"><em class="up">5068.47</em><em class="up">45.37</em><em class="up">0.90%</em></dd>
+    <dd class="chart">
+      <div class="chart_box"><img alt="000001" src="/images/000001.png" width="230" /></div>
+    </dd>
+  </dl>
+  <dl class="market_item m2">
+    <dt class="mn"><span class="translation_missing" title="translation missing: zh-CN.asset_class.shared.indice.深圳成指">深圳成指</span></dt>
+    <dd class="data"><em class="down">17501.05</em><em class="down">-37.45</em><em class="down">-0.21%</em></dd>
+    <dd class="chart">
+      <div class="chart_box"><img alt="399001" src="/images/399001.png" width="230" /></div>
+    </dd>
+  </dl>
+  <dl class="market_item m3">
+    <dt class="mn"><span class="translation_missing" title="translation missing: zh-CN.asset_class.shared.indice.沪深300">沪深300</span></dt>
+    <dd class="data"><em class="up">5268.63</em><em class="up">38.08</em><em class="up">0.73%</em></dd>
+    <dd class="chart">
+      <div class="chart_box"><img alt="000300" src="/images/000300.png" width="230" /></div>
+    </dd>
+  </dl>
+  <!-- 指数 E -->
+</div>
 <ng-view></ng-view>
 
 <!-- Libraries -->
 <script src="/js/angular.js"></script>
 <script src="/js/angular-route.js"></script>
 <script src="/js/angular-resource.js"></script>
+<script src="/js/services.js"></script>
 
 <!-- Template -->
-<script type="text/ng-template" id="/todos.html">
-	Initialize Stock Codes: {{ stockcodes }} <br/><br/>
-  	<button ng-click="initialize()">Initialize</button>
-
-	<br/><br/>
-  	Stock details: {{ stockdetails }}
-  	<button ng-click="getDetail()">Get Details</button>
+<script type="text/ng-template" id="/stocks.html">
+	导入股票数据数量: <input class="txt_input s_input" type="text" ng-model="stockamount"> {{ result }}
+    <br/>
+    <br/>
+  	<button class="btn btn_primary" ng-click="initialize()">导入</button>
+  	<br/><br/><br/><br/><br/><br/>
 
 </script>
-
-<script>
-  angular.module('app', ['ngRoute', 'ngResource'])
-
-    //---------------
-    // Services
-    //---------------
-
-    .factory('Stocks', ['$resource', function($resource){
-      return $resource('/manager/stockcodes', null, {
-        'update': { method: 'PUT' }
-      });
-    }])
-
-    //---------------
-    // Controllers
-    //---------------
-
-    .controller('InitController', ['$scope', 'Stocks', function ($scope, Stocks) {
-
-      $scope.initialize = function(){
-        $scope.stockcodes = Stocks.query();
-      }
-
-    }])
-
-    //---------------
-    // Routes
-    //---------------
-
-    .config(['$routeProvider', function ($routeProvider) {
-      $routeProvider
-        .when('/', {
-          templateUrl: '/todos.html',
-          controller: 'InitController'
-        });
-    }]);
-</script>
-
+</div>
 </body>
 </html>
