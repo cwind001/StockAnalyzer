@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="bower_components/highstock/highstock.js"></script>
+		<script src="bower_components/moment/moment.js"></script>
+	</head>
+<body>
+	<div id="container" style="height: 500px"></div>
+	<script src="js/candlestick.js"></script>
+	<script>
+		createCandlestick('#container','json/candlestick.json');
+	</script>
+</body>
+</html>

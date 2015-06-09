@@ -12,6 +12,20 @@ router.get('/', function(req, res, next) {
   });
 });
 
+router.get('/topvolumn', function(req, res, next){
+  Stock.find({}, null, {limit:20, sort:{volumn:-1}}, function (err, stocks) {
+  if (err) return next(err);
+    res.json(stocks);
+  });
+});
+
+router.get('/toprate', function(req, res, next){
+  Stock.find({}, null, {limit:20, sort:{offrate:-1}}, function (err, stocks) {
+  if (err) return next(err);
+    res.json(stocks);
+  });
+});
+
 /* POST /stocks */
 router.post('/', function(req, res, next) {
   Stock.create(req.body, function (err, post) {

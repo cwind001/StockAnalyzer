@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html ng-app="main">
 <head>
   <title>StockAnalyzer</title>
   <link rel='stylesheet' href='/stylesheets/style.min.css'/>
@@ -7,22 +7,27 @@
   <link rel='stylesheet' href='/stylesheets/market.css'/>
   <link rel='stylesheet' href='/stylesheets/bootstrap.min.css'/>
 
-  <!-- Libraries -->
+</head>
+<body style="height:100%;overflow:scroll;">
+ <!-- Libraries -->
   <script src="/js/jquery-1.11.3.min.js"></script>
   <script src="/js/angular.js"></script>
   <script src="/js/angular-route.js"></script>
   <script src="/js/angular-resource.js"></script>
+  <script src="/js/mainService.js"></script>
+  <script src="/js/highstock.js"></script>
+  <script src="/js/moment.js"></script>
+  <script src="/js/candlestick.js"></script>
+  <script src="/js/highcharts.js"></script>
 
-</head>
-<body style="height:100%;overflow:scroll;">
-   <!-- 顶部主导航 S -->
+<!-- 顶部主导航 S -->
 <div id="global_header" class="global_header">
   <div class="wrapper_center clearfix global_nav_inner">
     <div class="logo"><a href="#">股票分析</a></div>
     <ul id="global_nav" class="global_nav">
         <!-- 行情 -->
         <li class="current">
-          <a href="#/5574279d97775bf586c52965">行情</a>
+          <a href="/">行情</a>
         </li>
         <!-- /行情 -->
         <li class="">
@@ -39,10 +44,11 @@
 <!-- 顶部主导航 E -->
 <div class="wrapper_center clearfix global_nav_inner" >
 
-<ng-view></ng-view>
+<ng-view></ng-view>  
 
 <!-- Template -->
-<script type="text/ng-template" id="/main.html">
+<script type="text/ng-template" id="/stocklist.html">
+<h2>股票行情</h2>
 <div class="market_data_area">
   <!-- 指数 S -->
   <dl class="market_item m1">
@@ -68,113 +74,102 @@
   </dl>
   <!-- 指数 E -->
 </div>
-  Search: <input type="text" ng-model="search.name">
-  <ul>
-    <li ng-repeat="todo in todos | filter: search">
-      <input type="checkbox" ng-model="todo.completed" ng-change="update($index)">
-      <a ng-show="!editing[$index]" href="#/{{ todo._id }}">{{todo.name}}</a>
-      <button ng-show="!editing[$index]" ng-click="edit($index)">edit</button>
-      <button ng-show="!editing[$index]" ng-click="remove($index)">remove</button>
-
-      <input ng-show="editing[$index]" type="text" ng-model="todo.name">
-      <button ng-show="editing[$index]" ng-click="update($index)">update</button>
-      <button ng-show="editing[$index]" ng-click="cancel($index)">cancel</button>      
-    </li>
-  </ul>
-  New task <input type="text" ng-model="newTodo"><button ng-click="save()">Create</button>
+<br/>
+<div>
+    <h3>沪深成交量前二十</h3>
+<span style="float:right">
+        搜索: <input type="text" class="txt_input s_input" ng-model="search.code">
+</span>
+</div>
+</br>
+</br>
+  <table id="listtable" class="table table-striped" width="100%">
+    <tr>
+      <th class="t_td">代码</th>
+      <th class="n_td">名称</th>
+      <th class="price_td">最新价</th>
+      <th class="dpe_td">涨跌额</th>
+      <th class="dpf_td">涨跌幅</th>
+      <th class="hl_td">最高价</th>
+      <th class="hl_td">最低价</th>
+      <th class="cjl_td">成交量/手</th>
+      <th class="cje_td">成交额/万</th>
+      <th class="act_td">&nbsp;</th>
+    </tr>
+    <tr ng-repeat="stock in topvstocks | filter: search" ng-class-even="'even'" ng-class-odd="'odd'">
+      <td>{{ stock.code }}</td>
+      <td>{{ stock.name }}</td>
+      <td class="{{ stock.newest>stock.close?'up':'down' }}">{{ stock.newest }}</td>
+      <td class="{{ stock.offset>0?'up':'down' }}">{{ stock.offset }}</td>
+      <td class="{{ stock.offrate>0?'up':'down' }}">{{ stock.offrate }}</td>
+      <td class="{{ stock.high>stock.close?'up':'down' }}">{{ stock.high }}</td>
+      <td class="{{ stock.low>stock.close?'up':'down' }}">{{ stock.low }}</td>
+      <td>{{ stock.volumn }}</td>
+      <td>{{ stock.turnover }}</td>
+      <td class="act_td"><a class="trading_btn" href="#/557684bdd6a938f878923109">交易</a></td>
+    </tr>
+  </table>
+  <br/>
+<div>
+    <h3>沪深涨幅前二十</h3>
+<span style="float:right">
+        搜索: <input type="text" class="txt_input s_input" ng-model="search2.code">
+</span>
+</div>
+</br>
+</br>
+  <table id="listtable" class="table table-striped" width="100%">
+    <tr>
+      <th class="t_td">代码</th>
+      <th class="n_td">名称</th>
+      <th class="price_td">最新价</th>
+      <th class="dpe_td">涨跌额</th>
+      <th class="dpf_td">涨跌幅</th>
+      <th class="hl_td">最高价</th>
+      <th class="hl_td">最低价</th>
+      <th class="cjl_td">成交量/手</th>
+      <th class="cje_td">成交额/万</th>
+      <th class="act_td">&nbsp;</th>
+    </tr>
+    <tr ng-repeat="stock in toprstocks | filter: search2" ng-class-even="'even'" ng-class-odd="'odd'">
+      <td><a href> {{ stock.code }}</td>
+      <td>{{ stock.name }}</td>
+      <td class="{{ stock.newest>stock.close?'up':'down' }}">{{ stock.newest }}</td>
+      <td class="{{ stock.offset>0?'up':'down' }}">{{ stock.offset }}</td>
+      <td class="{{ stock.offrate>0?'up':'down' }}">{{ stock.offrate }}</td>
+      <td class="{{ stock.high>stock.close?'up':'down' }}">{{ stock.high }}</td>
+      <td class="{{ stock.low>stock.close?'up':'down' }}">{{ stock.low }}</td>
+      <td>{{ stock.volumn }}</td>
+      <td>{{ stock.turnover }}</td>
+      <td class="act_td"><a class="trading_btn" href="#/557684bdd6a938f878923109">交易</a></td>
+    </tr>
+  </table>
 </script>
 
-<script type="text/ng-template" id="/todoDetails.html">
-  <h1>{{ todo.name }}</h1>
-  completed: <input type="checkbox" ng-model="todo.completed"><br>
-  note: <textarea ng-model="todo.note"></textarea><br><br>
+<script type="text/ng-template" id="/stockDetails.html">
+  <div id="container"></div>
+  <div id="container2"></div>
+  <script>
+  $(function () {
+        Highcharts.setOptions({
+            colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4']
+          });
 
-  <button ng-click="update()">update</button>
-  <a href="/">Cancel</a>
+          $('#container2').highcharts({
+            chart: {
+              type: 'pie'
+          },
+
+          series: [{
+              data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+            }]
+          });
+      });
+      createCandlestick('#container', '/json/candlestick.json');
+  </script>
 </script>
 
 <script>
-  angular.module('app', ['ngRoute', 'ngResource'])
-
-    //---------------
-    // Services
-    //---------------
-
-    .factory('Todos', ['$resource', function($resource){
-      return $resource('/todos/:id', null, {
-        'update': { method: 'PUT' }
-      });
-    }])
-
-    //---------------
-    // Controllers
-    //---------------
-
-    .controller('MainController', ['$scope', 'Todos', function ($scope, Todos) {
-      $scope.editing = [];
-      $scope.todos = Todos.query();
-
-      $scope.save = function(){
-        if(!$scope.newTodo || $scope.newTodo.length < 1) return;
-        var todo = new Todos({name: $scope.newTodo, completed: false});
-
-        todo.$save(function(){
-          $scope.todos.push(todo);
-          $scope.newTodo = '';
-        });
-      }
-
-      $scope.update = function(index) {
-        var todo = $scope.todos[index];
-        Todos.update({id: todo._id}, todo);
-        $scope.editing[index] = false;
-      }
-
-      $scope.edit = function(index) {
-        $scope.editing[index] = angular.copy($scope.todos[index]);
-      }
-
-      $scope.cancel = function(index) {
-        $scope.todos[index] = angular.copy($scope.editing[index]);
-        $scope.editing[index] = false;
-      }
-
-      $scope.remove = function(index) {
-        var todo = $scope.todos[index];
-        Todos.delete({id: todo._id}, function(){
-          $scope.todos.splice(index, 1);
-        })
-      }
-
-    }])
-
-    .controller('TodoDetailCtrl', ['$scope', '$routeParams', 'Todos', '$location', function ($scope, $routeParams, Todos, $location) {
-      $scope.todo = Todos.get({id: $routeParams.id});
-      $scope.update = function() {
-        Todos.update({id: $scope.todo._id}, $scope.todo, function(){
-          $location.url('/');
-        });
-      }
-    }])
-
-    //---------------
-    // Routes
-    //---------------
-
-    .config(['$routeProvider', function ($routeProvider) {
-      $routeProvider
-        .when('/', {
-          templateUrl: '/main.html',
-          controller: 'MainController'
-        })
-
-        .when('/:id', {
-          templateUrl: '/todoDetails.html',
-          controller: 'TodoDetailCtrl'
-       });
-    }]);
-</script>
- <script>
     $("#global_nav").click(function(e){
       $(".global_nav li").each(function(){
         $(this).removeClass("current");
@@ -184,8 +179,8 @@
       console.log(currentEl.get(0).tagName=="A");
       var currentEl = currentEl.get(0).tagName=="A"?currentEl.parent():currentEl;
       currentEl.addClass("current");
-    })
-  </script>
+    });
+</script>
 </div>
 </body>
 </html>

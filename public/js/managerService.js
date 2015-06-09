@@ -47,8 +47,10 @@
     app.config(['$routeProvider', function ($routeProvider) {
       $routeProvider
         .when('/', {
-          templateUrl: '/stocks.html',
+          templateUrl: '/manager.html',
           controller: 'InitController'
         });
     }]);
+
+    
 
