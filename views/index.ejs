@@ -19,6 +19,7 @@
   <script src="/js/moment.js"></script>
   <script src="/js/candlestick.js"></script>
   <script src="/js/highcharts.js"></script>
+  <script src="/js/highcharts-3d.js"></script>
 
 <!-- 顶部主导航 S -->
 <div id="global_header" class="global_header">
@@ -31,11 +32,11 @@
         </li>
         <!-- /行情 -->
         <li class="">
-          <a href="#/557684afd6a938f878923108">推荐</a>
+          <a href="#/recommends">推荐</a>
         </li>
 
         <li class="">
-          <a href="#/557684bdd6a938f878923109">持仓</a>
+          <a href="#/holdings">持仓</a>
         </li>
       </ul>
     <div class="help"><a href="/manager">后台管理</a></div>
@@ -106,7 +107,7 @@
       <td class="{{ stock.low>stock.close?'up':'down' }}">{{ stock.low }}</td>
       <td>{{ stock.volumn }}</td>
       <td>{{ stock.turnover }}</td>
-      <td class="act_td"><a class="trading_btn" href="#/557684bdd6a938f878923109">交易</a></td>
+      <td class="act_td"><a class="trading_btn" href="#/{{ stock._id }}">详情</a></td>
     </tr>
   </table>
   <br/>
@@ -141,14 +142,33 @@
       <td class="{{ stock.low>stock.close?'up':'down' }}">{{ stock.low }}</td>
       <td>{{ stock.volumn }}</td>
       <td>{{ stock.turnover }}</td>
-      <td class="act_td"><a class="trading_btn" href="#/557684bdd6a938f878923109">交易</a></td>
+      <td class="act_td"><a class="trading_btn" href="#/{{ stock._id }}">详情</a></td>
     </tr>
   </table>
 </script>
 
 <script type="text/ng-template" id="/stockDetails.html">
+  <h2>{{ stkdetail.name }} </h2>
   <div id="container"></div>
-  <div id="container2"></div>
+  <div class="my_trading_box">
+  <div class="trading_list">
+    <table>
+    <tr> <td style="float:left">代码</td><td> {{ stkdetail.code }} </td> </tr>
+    <tr><td style="float:left">最新价</td><td class="{{ stkdetail.newest>stock.close?'up':'down' }}">{{ stkdetail.newest }}</td> 
+    <td style="float:left">涨跌额</td><td class="{{ stkdetail.offset>0?'up':'down' }}">{{ stkdetail.offset }}</td> <td style="float:left">涨跌幅</td> <td class="{{ stkdetail.offset>0?'up':'down' }}">{{ stkdetail.offset }}</td> <td style="float:left">最高价</td> <td class="{{ stkdetail.high>stock.close?'up':'down' }}">{{ stkdetail.high }}</td> <td style="float:left">最低价</td> <td class="{{ stkdetail.low>stock.close?'up':'down' }}">{{ stkdetail.low }}</td> <td style="float:left">昨收</td><td>{{ stkdetail.close }}</td> <td style="float:left">今开</td><td class="{{ stkdetail.open>stock.open?'up':'down' }}">{{ stkdetail.open }}</td><td style="float:left">成交量/手</td> <td>{{ stkdetail.volumn }}</td> <td style="float:left">成交额/万</td> <td>{{ stkdetail.turnover }}</td></tr>
+    </table>
+    <table>
+      <tr>
+        <td><a class="btn btn_primary" ng-click="displaybuy()">买入</a></td>
+        <td ng-show="showbuy"><input class="txt_input s_input" type="text" ng-model="scount"/></td>
+        <td>总价</td>
+        <td>{{ scount * stkdetail.newest }} </td>
+        <td ng-show="showbuy"><a class="btn btn_primary" ng-click="confirmbuy()">确认</a></td>
+      </tr>
+    </table>
+    <a class="help btn btn_primary" href="/">返回</a>
+  </div>
+  </div>
   <script>
   $(function () {
         Highcharts.setOptions({
@@ -167,6 +187,102 @@
       });
       createCandlestick('#container', '/json/candlestick.json');
   </script>
+</script>
+
+<script type="text/ng-template" id="/holdings.html">
+  <h2> 持仓情况 </h2>
+  <div>
+    <div style="float:left" id="container"></div>
+    <div style="float:left">
+      <table id="listtable2" class="table table-striped" width="100%">
+      <tr>
+        <th class="n_td">代码</th>
+        <th class="price_td">名称</th>
+        <th>当前价</th>
+        <th class="dpe_td">持仓数</th>
+        <th class="dpf_td">总价值</th>
+      </tr>
+      <tr ng-repeat="holding in holdings | filter: search2" ng-class-even="'even'" ng-class-odd="'odd'">
+        <td>{{ holding.code }}</td>
+        <td>{{ holding.name }}</td>
+        <td>{{ holding.newest }}</td>
+        <td>{{ holding.amount }}</td>
+        <td>{{ holding.newest * holding.amount }}</td>
+      </tr>
+    </table>
+    </div>
+      <p id="pdata" ng-show="false"> {{ piedata }} </p>
+  </div>
+  <script>
+  $(document).ready(function () {
+        var chartdata = JSON.parse($('#pdata').text());
+
+        Highcharts.setOptions({
+            colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4']
+          });
+
+          $('#container').highcharts({
+            chart: {
+              type: 'pie',
+              options3d: {
+                enabled: true,
+                alpha: 45,
+                beta: 0,
+              }
+          },
+            title: {
+              text: '您的当前持仓情况'
+            },
+            plotOptions: {
+              pie: {
+                depth: 25
+              }
+            },
+          series: [{
+              data: chartdata
+            }]
+          });
+      });
+  </script>
+</script>
+
+<script type="text/ng-template" id="/recommends.html">
+  <h2> 推荐关注 </h2>
+  <div>
+    <h3>根据热点新闻推荐关注</h3>
+    <br/>
+    <table>
+      <tr>
+        <td style="font-weight:bold">本日关键词：</td> <td>&nbsp;</td><td style="color:red">"{{ keyword1 }}" </td><td> , </td><td style="color:red"> "{{ keyword2 }}"</td>
+      </tr>
+    </table>
+    <br/>
+    <table id="listtable" class="table table-striped" width="100%">
+      <tr>
+        <th class="t_td">关键词</th>
+        <th class="n_td">代码</th>
+        <th class="price_td">名称</th>
+        <th>当前价</th>
+        <th class="dpe_td">涨跌额</th>
+        <th class="dpf_td">涨跌幅</th>
+        <th class="hl_td">昨收</th>
+        <th class="hl_td">今开</th>
+        <th class="cjl_td">相关度</th>
+      </tr>
+      <tr ng-repeat="rec in recommendslist | filter: search2" ng-class-even="'even'" ng-class-odd="'odd'">
+        <td class="up">{{ rec.keyword }}</td>
+        <td>{{ rec.code }}</td>
+        <td>{{ rec.name }}</td>
+        <td class="{{ rec.newest>rec.close?'up':'down' }}">{{ rec.newest }}</td>
+        <td class="{{ rec.offset>0?'up':'down' }}">{{ rec.offset }}</td>
+        <td class="{{ rec.offrate>0?'up':'down' }}">{{ rec.offrate }}</td>
+        <td>{{ rec.close }}</td>
+        <td class="{{ rec.low>rec.close?'up':'down' }}">{{ rec.open }}</td>
+        <td class="{{ rec.confidencescore>80?'up':'down' }}">{{ rec.confidencescore }}</td>
+      </tr>
+    </table>
+  </div>
+  <a class="help btn btn_primary" href="/">返回</a>
 </script>
 
 <script>

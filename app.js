@@ -6,9 +6,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var todos = require('./routes/todos');
 var manager = require('./routes/manager');
 var stocks = require('./routes/stocks');
+var holdings = require('./routes/holdings');
+var recommends = require('./routes/recommends');
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/stockAnalyzer', function(err) {
@@ -34,9 +35,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/todos', todos);
 app.use('/manager', manager);
 app.use('/stocks', stocks);
+app.use('/holdings', holdings);
+app.use('/recommends', recommends);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -49,11 +49,17 @@
 
 <!-- Template -->
 <script type="text/ng-template" id="/manager.html">
-	导入股票数据数量: <input class="txt_input s_input" type="text" ng-model="stockamount"> {{ result }}
-    <br/>
-    <br/>
+	<div style="float:right"><h3 style="color:red">{{ result }}</h3></div>
+  导入股票数据数量: <input class="txt_input s_input" type="text" ng-model="stockamount"> 
+    <br/><br/>    
   	<button class="btn btn_primary" ng-click="initialize()">导入</button>
-  	<br/><br/><br/><br/><br/><br/>
+  	<br/><br/><br/>
+    根据当日热点新闻生成推荐：
+    <br/><br/>
+    <button class="btn btn_primary" ng-click="genRecommends()">生成</button>
+    <br/>
+    <br/>
+    <a class="help btn btn_primary" href="/">返回</a>
 
 </script>
 </div>

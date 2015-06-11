@@ -2,43 +2,43 @@ var express = require('express');
 var router = express.Router();
 
 var mongoose = require('mongoose');
-var Todo = require('../models/Todo.js');
+var Holding = require('../models/Holding.js');
 
-/* GET /todos listing. */
+/* GET /holdings listing. */
 router.get('/', function(req, res, next) {
-  Todo.find(function (err, todos) {
+  Holding.find(function (err, holdings) {
     if (err) return next(err);
-    res.json(todos);
+    res.json(holdings);
   });
 });
 
-/* POST /todos */
+/* POST /holdings */
 router.post('/', function(req, res, next) {
-  Todo.create(req.body, function (err, post) {
+  Holding.create(req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
 });
 
-/* GET /todos/id */
+/* GET /holdings/id */
 router.get('/:id', function(req, res, next) {
-  Todo.findById(req.params.id, function (err, post) {
+  Holding.findById(req.params.id, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
 });
 
-/* PUT /todos/:id */
+/* PUT /holdings/:id */
 router.put('/:id', function(req, res, next) {
-  Todo.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+  Holding.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
 });
 
-/* DELETE /todos/:id */
+/* DELETE /holdings/:id */
 router.delete('/:id', function(req, res, next) {
-  Todo.findByIdAndRemove(req.params.id, req.body, function (err, post) {
+  Holding.findByIdAndRemove(req.params.id, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
